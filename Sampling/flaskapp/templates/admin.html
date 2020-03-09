@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="{{ url_for('admin') }}">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Non-Verified Users</legend>
+                <div class="form-group">
+                    {% for value, email in tuple_list %}
+                        <input id="checklist-{{value}}" name="checklist" type="checkbox" value="{{ value }}">
+                        <label for="checklist-{{value}}">{{ email }}</label> <br>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    {{ form.verify_or_remove(class="list-unstyled ") }}
+                </div>
+                <div class="form-check">
+                    {{ form.remove_verified(class="form-check-input") }}
+                    {{ form.remove_verified.label(class="form-check-label") }}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                    {{ form.submit(class="btn btn-warning") }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}

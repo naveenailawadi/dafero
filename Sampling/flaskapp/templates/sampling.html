@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form method="POST" action="/sampling">
+    {{ form.hidden_tag() }}
+    {% for field in form.survey_questions %}
+    <div class="form-group">
+        {% for value, question, setting in form.survey_questions[field] %}
+            <label class="btn btn-{{setting}}">
+                <input type="radio" name="{{ field }}" value="{{ value }}" required="True"> {{ question }}<br>
+            </label>
+        {% endfor %}
+    </div>
+  {% endfor %}
+  {{ form.submit(class="btn btn-outline-info") }}
+
+{% endblock content %}
